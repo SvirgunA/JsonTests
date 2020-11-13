@@ -1,0 +1,14 @@
+﻿{"Root":
+[
+  {
+    "ObjectName": "client",
+    "IsBase": true,
+    "FieldPath" : "clients[].name"
+  },
+  {
+    "ObjectName": "prices",
+    "IsBase": false,
+    "FieldPath" : "clients[].orders[].price[]"
+  }
+]
+}

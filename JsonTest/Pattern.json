@@ -1,0 +1,34 @@
+﻿{"Root": 
+  [
+    {
+      "ObjectName": "ClientName",
+      "IsBase": false,
+      "FieldPath" : "clients[].name"
+    },
+    {
+      "ObjectName": "Product",
+      "IsBase": true,
+      "FieldPath" : "clients[].orders[].productId"
+    },
+    {
+      "ObjectName": "Price",
+      "IsBase": false,
+      "FieldPath" : "clients[].orders[].price"
+    },
+    {
+      "ObjectName": "Phone",
+      "IsBase": false,
+      "FieldPath" : "phone"
+    },
+    {
+      "ObjectName": "ClientId",
+      "IsBase": false,
+      "FieldPath" : "clients[].id"
+    },
+    {
+      "ObjectName": "PriceId",
+      "IsBase": false,
+      "FieldPath" : "clients[1].orders[0].id"
+    }
+  ]
+}

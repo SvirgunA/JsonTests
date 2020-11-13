@@ -1,0 +1,87 @@
+﻿{
+	"clients": [
+		{
+			"id": 69343,
+			"name": "Andrew",
+			"orders": []
+		},
+		{
+			"id": 69344,
+			"name": "Mike",
+			"Cart": [
+				{
+					"id": 23,
+					"productId": 1001,
+					"count": 1,
+					"price": 500
+				},
+				{
+					"id": 24,
+					"productId": 1002,
+					"count": 2,
+					"price": 800
+				}
+			],
+			"orders": [
+				{
+					"id": 23,
+					"productId": 2001,
+					"count": 1,
+					"price": 500
+				}
+			]
+		},
+		{
+			"id": 69345,
+			"name": "John",
+			"orders": [
+				{
+					"id": 25,
+					"productId": 1003,
+					"count": 1,
+					"price": 500
+				},
+				{
+					"id": 26,
+					"productId": 1002,
+					"count": 1,
+					"price": 400
+				},
+				{
+					"id": 27,
+					"productId": 1004,
+					"count": 5,
+					"price": 105
+				}
+			]
+		},
+		{
+			"id": 69346,
+			"name": "Olivia",
+			"orders": [
+				{
+					"id": 125,
+					"productId": 1013,
+					"count": 10,
+					"price": 50
+				},
+				{
+					"id": 126,
+					"productId": 1052,
+					"count": 6,
+					"price": 12
+				},
+				{
+					"id": 127,
+					"productId": 1064,
+					"count": 1,
+					"price": 25.5
+				}
+			]
+		}
+	],
+	"type": "Random Email",
+	"version": 1.5,
+	"email": "test@mailinator.com",
+	"phone": "+17777777777"
+}
