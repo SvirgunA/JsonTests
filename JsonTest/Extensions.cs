@@ -17,7 +17,7 @@ namespace JsonTest
                 foreach (var p in path)
                 {
                     var type = p.Contains("[]") ? NodeType.Array : NodeType.Field;
-                    node = node.CreateChild(p.Replace("[]", string.Empty), type);
+                    node = node.CreateChild(p.Replace("[]", string.Empty), type, field.FieldName);
                 }
             }
 
@@ -37,7 +37,7 @@ namespace JsonTest
                 if (!transformationTree[name].HasKids)
                 {
                     var value = obj.SelectToken(name, false);
-                    levelObj[name] = value;
+                    levelObj[transformationTree[name].FieldName] = value;
                 }
                 else
                 {

@@ -16,6 +16,8 @@ namespace JsonTest
     {
         private string _name { get; set; }
 
+        private string _fieldName { get; set; }
+
         private NodeType _type { get; set; }
 
         private ResultFieldsNode _parent { get; set; }
@@ -30,6 +32,8 @@ namespace JsonTest
 
         public string Name => _name;
 
+        public string FieldName => _fieldName;
+
         public NodeType Type => _type;
 
         public string[] ChildrenNames => _children.Keys.ToArray();
@@ -38,13 +42,14 @@ namespace JsonTest
         
         public ResultFieldsNode this[string name] => _children.ContainsKey(name) ? _children[name] : null;
 
-        public ResultFieldsNode CreateChild(string name, NodeType type)
+        public ResultFieldsNode CreateChild(string name, NodeType type, string fieldName)
         {
             if (!_children.ContainsKey(name))
             {
                 _children.Add(name, new ResultFieldsNode
                 {
                     _name = name,
+                    _fieldName = fieldName,
                     _type = type,
                     _parent = this,
                 });
