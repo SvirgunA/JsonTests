@@ -6,9 +6,9 @@
     "FieldPath" : "clients[].name"
   },
   {
-    "ObjectName": "prices",
+    "ObjectName": "client.prices[]",
     "IsBase": false,
-    "FieldPath" : "clients[].orders[].price[]"
+    "FieldPath" : "clients[].orders[].price"
   }
 ]
 }

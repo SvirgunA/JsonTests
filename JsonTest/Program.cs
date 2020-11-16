@@ -20,14 +20,16 @@ namespace JsonTest
         {
             var patternString = File.ReadAllText("Pattern.json");
             Pattern = JsonConvert.DeserializeObject<Pattern>(patternString);
-            
-            
+
             using (var reader = new StreamReader("InboundData.json"))
             using (var jsonReader = new JsonTextReader(reader))
             {
                 var root = JToken.Load(jsonReader);
+
+                var elements = GetNodes(root, "clients[].orders[].price[]");
+
                 GenerateTree(root, tree);
-                
+
                 var result = GenerateDepthMatrix();
                 var json = JsonConvert.SerializeObject(result);
                 var fileName = $"{Guid.NewGuid()}.json";
@@ -40,9 +42,9 @@ namespace JsonTest
         {
             var baseElement = Pattern.Root.First(p => p.IsBase);
 
-            var elements = tree.FindTreeNodes(p => 
-                p.Data == baseElement.FieldName 
-                && p.Level == baseElement.Level 
+            var elements = tree.FindTreeNodes(p =>
+                p.Data == baseElement.FieldName
+                && p.Level == baseElement.Level
                 && p.Parent.NodeName == baseElement.ParentName);
 
             var objList = new List<IDictionary<string, Object>>();
@@ -83,12 +85,33 @@ namespace JsonTest
             }
         }
 
-        static JToken[] GetNodes(JToken obj, string path)
+        static List<JToken> GetNodes(JToken obj, string path)
         {
             var first = path.GetFirstEl();
-            //obj.Children().Where(p => p)
+            var tail = path.GetChildrenPath();
 
-            return null;
+            if (string.IsNullOrEmpty(tail))
+            {
+                return new List<JToken>(obj);
+            }
+
+            var tokens = new List<JToken>();
+            if (obj.Type is JTokenType.Property)
+            {
+                tokens.AddRange(obj.Values()
+                    .Select(el => GetNodes(el, path))
+                    .SelectMany(el => el)
+                    .SelectMany(el => el));
+            }
+            else
+            {
+                tokens.AddRange(obj.Children()
+                    .Where(p => (p as JProperty)?.Name == first)
+                    .Select(el => GetNodes(el, tail))
+                    .SelectMany(el => el));
+            }
+
+            return tokens;
         }
 
         static void GenerateTree(JToken obj, TreeNode<string> node)
@@ -102,7 +125,7 @@ namespace JsonTest
                     // if value is true value
                     if ((child.First as JValue) != null)
                     {
-                        // add node with key 
+                        // add node with key
                         node.AddChild((child as JProperty).Name)
                             // and add leaf with value.
                             .AddChild((child.First as JValue)?.Value.ToString());
@@ -116,7 +139,7 @@ namespace JsonTest
                 // if child is array
                 else
                 {
-                    // add node and recursion 
+                    // add node and recursion
                     GenerateTree(child, node.AddChild(child.Path));
                 }
             }
