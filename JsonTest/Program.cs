@@ -15,14 +15,12 @@ namespace JsonTest
         {
             var fieldsString = File.ReadAllText("Fields.json");
             _fields = JsonConvert.DeserializeObject<List<ResultField>>(fieldsString);
-            var t = _fields.ToTree();
-
 
             using var reader = new StreamReader("InboundData.json");
             using var jsonReader = new JsonTextReader(reader);
             var inputTree = JToken.Load(jsonReader);
 
-            var results = inputTree.TransformObject(t);
+            var results = inputTree.TransformObject(_fields.ToTree());
         }
     }
 }

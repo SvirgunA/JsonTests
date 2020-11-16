@@ -1,26 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTest
 {
-    public static class Extensions
-    {
-        public static string GetFirstEl(this string path)
-        {
-            var a = path.Split('.');
-            return a[0].Replace("[]", "");
-        }
-        
-        public static string GetChildrenPath(this string path)
-        {
-            var a = path.Split('.').Skip(1);
-            return string.Join(".", a);
-        }
-    }
-
     public static class FieldsExtensions
     {
         public static ResultFieldsNode ToTree(this List<ResultField> fieldsList)
@@ -43,17 +27,17 @@ namespace JsonTest
 
     public static class JObjectExtensions
     {
-        public static List<dynamic> TransformObject(this JToken obj, ResultFieldsNode transformationTree)
+        public static List<JObject> TransformObject(this JToken obj, ResultFieldsNode transformationTree)
         {
-            dynamic levelObj = new object();
-            List<dynamic> levelObjs = new List<dynamic>();
+            var levelObj = new JObject();
+            var levelObjs = new List<JObject>();
 
             foreach (var name in transformationTree.ChildrenNames)
             {
                 if (!transformationTree[name].HasKids)
                 {
                     var value = obj.SelectToken(name, false);
-                    SetObjectProperty(name, value, levelObj);
+                    levelObj[name] = value;
                 }
                 else
                 {
@@ -89,33 +73,10 @@ namespace JsonTest
             return levelObjs;
         }
 
-        private static dynamic Merge(object item1, object item2)
+        private static JObject Merge(JObject a, JObject b)
         {
-            IDictionary<string, object> result = new ExpandoObject();
-
-            foreach (var property in item1.GetType().GetProperties())
-            {
-                if (property.CanRead)
-                    result[property.Name] = property.GetValue(item1);
-            }
-
-            foreach (var property in item2.GetType().GetProperties())
-            {
-                if (property.CanRead)
-                    result[property.Name] = property.GetValue(item2);
-            }
-
-            return result;
-        }
-
-        private static void SetObjectProperty(string propertyName, object value, object obj)
-        {
-            PropertyInfo propertyInfo = obj.GetType().GetProperty(propertyName);
-            // make sure object has the property we are after
-            if (propertyInfo != null)
-            {
-                propertyInfo.SetValue(obj, value, null);
-            }
+            a.Merge(b);
+            return a;
         }
     }
 }
