@@ -1,0 +1,18 @@
+﻿{
+  "orders": [
+    {
+      "id": 123
+    },
+    {
+      "id": 124
+    }
+  ],
+  "clients": [
+    {
+      "name": "Kolia"
+    },
+    {
+      "name": "Katia"
+    }
+  ]
+}

@@ -13,10 +13,10 @@ namespace JsonTest
 
         static void Main(string[] args)
         {
-            var fieldsString = File.ReadAllText("Fields.json");
+            var fieldsString = File.ReadAllText("Fields2.json");
             _fields = JsonConvert.DeserializeObject<List<ResultField>>(fieldsString);
 
-            using var reader = new StreamReader("InboundData.json");
+            using var reader = new StreamReader("InboundData2.json");
             using var jsonReader = new JsonTextReader(reader);
             var inputTree = JToken.Load(jsonReader);
 

@@ -75,8 +75,9 @@ namespace JsonTest
 
         private static JObject Merge(JObject a, JObject b)
         {
-            a.Merge(b);
-            return a;
+            var tmp = (JObject)a.DeepClone();
+            tmp.Merge(b);
+            return tmp;
         }
     }
 }

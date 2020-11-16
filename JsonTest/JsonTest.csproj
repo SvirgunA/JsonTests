@@ -6,11 +6,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Content Include="Fields2.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Content Include="InboundData.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Include="Fields.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="InboundData2.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Include="Pattern1.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>

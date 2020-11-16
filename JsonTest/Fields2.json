@@ -1,0 +1,10 @@
+﻿[
+  {
+    "FieldName": "Client",
+    "FieldPath": "clients[].name"
+  },
+  {
+    "FieldName": "OrderId",
+    "FieldPath": "orders[].id"
+  }
+]
