@@ -9,7 +9,7 @@
         <Content Include="InboundData.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="Pattern.json">
+        <Content Include="Fields.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Include="Pattern1.json">

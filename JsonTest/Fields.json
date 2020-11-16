@@ -1,0 +1,26 @@
+﻿[
+  {
+    "FieldName": "ClientName",
+    "FieldPath": "clients[].name"
+  },
+  {
+    "FieldName": "Product",
+    "FieldPath": "clients[].orders[].productId"
+  },
+  {
+    "FieldName": "Price",
+    "FieldPath": "clients[].orders[].price"
+  },
+  {
+    "FieldName": "Phone",
+    "FieldPath": "phone"
+  },
+  {
+    "FieldName": "ClientId",
+    "FieldPath": "clients[].id"
+  },
+  {
+    "FieldName": "PriceId",
+    "FieldPath": "clients[].orders[].id"
+  }
+]
