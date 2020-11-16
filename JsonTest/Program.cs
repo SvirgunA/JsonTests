@@ -18,7 +18,7 @@ namespace JsonTest
 
         static void Main(string[] args)
         {
-            var patternString = File.ReadAllText("Pattern1.json");
+            var patternString = File.ReadAllText("Pattern.json");
             Pattern = JsonConvert.DeserializeObject<Pattern>(patternString);
             
             
@@ -27,6 +27,7 @@ namespace JsonTest
             {
                 var root = JToken.Load(jsonReader);
                 GenerateTree(root, tree);
+                
                 var result = GenerateDepthMatrix();
                 var json = JsonConvert.SerializeObject(result);
                 var fileName = $"{Guid.NewGuid()}.json";
@@ -72,19 +73,6 @@ namespace JsonTest
 
             return objList;
         }
-        
-        
-        
-
-        static string GetElementData(TreeNode<string> el)
-        {
-            if (el.Children.Count == 1 && el.Children.First().IsLeaf)
-            {
-                return el.Children.First().Data;
-            }
-
-            return null;
-        }
 
         static void PrintTree()
         {
@@ -93,6 +81,14 @@ namespace JsonTest
                 string indent = CreateIndent(node.Level);
                 Console.WriteLine(indent + (node.Data ?? "null"));
             }
+        }
+
+        static JToken[] GetNodes(JToken obj, string path)
+        {
+            var first = path.GetFirstEl();
+            //obj.Children().Where(p => p)
+
+            return null;
         }
 
         static void GenerateTree(JToken obj, TreeNode<string> node)

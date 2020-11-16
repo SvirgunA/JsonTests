@@ -15,9 +15,9 @@ namespace JsonTest
             switch (type)
             {
                 case NodeType.Field:
-                    return GetElement(treeEl, patternEl,out data);
+                    return GetElement(treeEl, patternEl, out data);
                 case NodeType.Array:
-                    return GetInnerArray(treeEl, patternEl,out data);
+                    return GetInnerArray(treeEl, patternEl, out data);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
